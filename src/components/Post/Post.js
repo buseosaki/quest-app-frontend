@@ -8,8 +8,8 @@ import ReactDOM from "react-dom";
 function Post() {
 
     //basta error olmayacak. ilk state'i null.
-    const[error, setError] = useState(null);
-    const [isLoaded, setisLoaded] = useState(false);
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
     const [postList, setPostList] = useState([]);
 
     //api callu useEffect icinde yapacagiz. data donerse 
@@ -21,11 +21,12 @@ function Post() {
         .then(
             (result) => {
                 //result gelirse datayı postList'e aktarmalı ve isLoaded'ı true stateine cekmeliyiz
-                setisLoaded(true);
+                setIsLoaded(true);
                 setPostList(result)
             },
-            (error) => {
-                setisLoaded(true);
+            (error) => { 
+                console.log(error)
+                setIsLoaded(true);
                 setError(error);
 
             }
@@ -34,7 +35,7 @@ function Post() {
 
     if(error) {
         return <div> Error !!! </div> 
-    } else if(isLoaded) {
+    } else if(!isLoaded) {
         return <div>Loading...</div>
     }else {
         return(
